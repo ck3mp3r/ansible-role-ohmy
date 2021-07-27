@@ -1,0 +1,22 @@
+---
+- name: Verify Oh My ZSH
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: Stat ~/.oh-my-zsh
+    stat:
+      path: ~/.oh-my-zsh
+    register: oh_my_zsh_exists
+
+  - name: ~/.oh-my-zsh exists
+    assert:
+      that: oh_my_zsh_exists.stat.exists
+
+  - name: Stat ~/.zplug
+    stat:
+      path: ~/.zplug
+    register: zplug_exists
+
+  - name: ~/.zplug exists
+    assert:
+      that: zplug_exists.stat.exists

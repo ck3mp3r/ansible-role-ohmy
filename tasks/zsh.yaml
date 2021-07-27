@@ -1,0 +1,78 @@
+---
+- name: Install zsh - (Linux)
+  become: yes
+  package:
+    name:
+      - zsh
+    state: latest
+  when: ansible_os_family | lower in ['debian', 'redhat']
+
+- name: Set zsh as default shell
+  user:
+    name: "{{ shell_user }}"
+    shell: /bin/zsh
+  become: yes
+
+- name: Create ~/.zshrc.d directory
+  file:
+    path: ~/.zshrc.d
+    state: directory
+
+- name: ZSH and Zplug configuration
+  blockinfile:
+    backup: yes
+    create: yes
+    path: ~/.zshrc
+    block: |
+      export ZSH=~/.oh-my-zsh
+      ZSH_DISABLE_COMPFIX="true"
+      COMPLETION_WAITING_DOTS="true"
+      plugins=({{ zsh_plugins }})
+      source $ZSH/oh-my-zsh.sh
+
+      export ZPLUG_HOME=~/.zplug
+      source $ZPLUG_HOME/init.zsh
+      # Load theme file
+      zplug '{{ zplug_theme }}', as:theme
+      
+      # Install plugins if there are plugins that have not been installed
+      if ! zplug check --verbose; then
+          printf "Install? [y/N]: "
+          if read -q; then
+              echo; zplug install
+          fi
+      fi
+
+      # Then, source plugins and add commands to $PATH
+      zplug load --verbose
+
+      # source additional configuration
+      if [[ -d ~/.zshrc.d ]]; then for n in `ls ~/.zshrc.d/`; do source ~/.zshrc.d/$n; done; fi
+
+- name: Check for Oh My ZSH Installation
+  stat:
+    path: ~/.oh-my-zsh
+  register: omz_installed
+
+- block:
+  - name: Install Oh My ZSH...
+    git:
+      repo: 'https://github.com/robbyrussell/oh-my-zsh.git'
+      dest: ~/.oh-my-zsh
+
+  - name: Install ZSH autocompletion...
+    git:
+      repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
+      dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+  when: not omz_installed.stat.exists
+
+- name: Check for Zplug Installation
+  stat:
+    path: ~/.zplug
+  register: zp_installed
+
+- name: Install Zplug...
+  git:
+    repo: 'https://github.com/zplug/zplug.git'
+    dest: ~/.zplug
+  when: not zp_installed.stat.exists

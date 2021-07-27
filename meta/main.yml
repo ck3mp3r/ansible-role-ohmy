@@ -1,0 +1,18 @@
+galaxy_info:
+  author: Christian Kemper
+  description: Oh My ZSH installation
+  license: MIT
+  role_name: ohmy
+  min_ansible_version: 2.1
+  galaxy_tags: []
+  platforms:
+    - name: MacOSX
+      versions:
+        - any
+    - name: Debian
+      versions:
+        - any
+    - name: Centos
+      versions:
+        - any
+dependencies: []

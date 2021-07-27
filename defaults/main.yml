@@ -1,0 +1,4 @@
+---
+shell_user: root
+zsh_plugins: git zsh-autosuggestions
+zplug_theme: dracula/zsh
