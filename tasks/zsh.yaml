@@ -17,11 +17,13 @@
   file:
     path: ~/.zshrc.d
     state: directory
+    mode: '1777'
 
 - name: ZSH and Zplug configuration
   blockinfile:
     backup: yes
     create: yes
+    mode: '0644'
     path: ~/.zshrc
     block: |
       export ZSH=~/.oh-my-zsh
