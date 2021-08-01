@@ -7,3 +7,5 @@
     - name: Include ansible-role-ohmy
       include_role:
         name: ansible-role-ohmy
+      vars:
+        shell_user: root
