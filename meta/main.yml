@@ -3,6 +3,7 @@ galaxy_info:
   description: Oh My ZSH installation
   license: MIT
   role_name: ohmy
+  namespace: ck3mp3r
   min_ansible_version: 2.1
   galaxy_tags: []
   platforms:
