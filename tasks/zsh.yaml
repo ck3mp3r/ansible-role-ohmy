@@ -51,6 +51,9 @@
       # source additional configuration
       if [[ -d ~/.zshrc.d ]]; then for n in `ls ~/.zshrc.d/`; do source ~/.zshrc.d/$n; done; fi
 
+      # add ~.local/bin to PATH
+      export PATH=$PATH:~/.local/bin
+
 - name: Check for Oh My ZSH Installation
   stat:
     path: ~/.oh-my-zsh
