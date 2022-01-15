@@ -52,7 +52,7 @@
       if [[ -d ~/.zshrc.d ]]; then for n in `ls ~/.zshrc.d/`; do source ~/.zshrc.d/$n; done; fi
 
       # add ~.local/bin to PATH
-      export PATH=$PATH:~/.local/bin
+      export PATH=~/.local/bin:$PATH
 
 - name: Check for Oh My ZSH Installation
   stat:
