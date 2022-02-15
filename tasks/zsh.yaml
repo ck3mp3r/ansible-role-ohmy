@@ -32,6 +32,18 @@
       plugins=({{ zsh_plugins }})
       source $ZSH/oh-my-zsh.sh
 
+      # History settings
+      HISTSIZE=5000
+      SAVEHIST=5000
+      HISTDUP=erase
+      setopt appendhistory
+      setopt sharehistory
+      setopt incappendhistory
+      setopt hist_ignore_all_dups
+      setopt hist_save_no_dups
+      setopt hist_ignore_dups
+      setopt hist_find_no_dups
+
       export ZPLUG_HOME=~/.zplug
       source $ZPLUG_HOME/init.zsh
       # Load theme file
