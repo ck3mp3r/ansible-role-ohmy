@@ -1,3 +1,3 @@
 ---
-zsh_plugins: git zsh-autosuggestions
+zsh_plugins: git zsh-autosuggestions history-substring-search
 zplug_theme: dracula/zsh
