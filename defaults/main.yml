@@ -2,3 +2,6 @@
 zsh_plugins: git zsh-autosuggestions history-substring-search
 zplug_theme: Moarram/headline
 zplug_verbose: false
+ohmy_user_settings: |
+  # some additional settings
+  # can go here

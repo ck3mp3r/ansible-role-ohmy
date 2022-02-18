@@ -66,6 +66,9 @@
       # add ~.local/bin to PATH
       export PATH=~/.local/bin:$PATH
 
+      # additional user settings
+      {{ ohmy_user_settings }}
+
 - name: Check for Oh My ZSH Installation
   stat:
     path: ~/.oh-my-zsh
