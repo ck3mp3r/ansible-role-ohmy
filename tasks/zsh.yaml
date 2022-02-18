@@ -58,7 +58,7 @@
       fi
 
       # Then, source plugins and add commands to $PATH
-      zplug load --verbose
+      zplug load{% if zplug_verbose %} --verbose{% endif %}
 
       # source additional configuration
       if [[ -d ~/.zshrc.d ]]; then for n in `ls ~/.zshrc.d/`; do source ~/.zshrc.d/$n; done; fi
