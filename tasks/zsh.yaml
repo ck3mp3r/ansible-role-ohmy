@@ -46,9 +46,12 @@
 
       export ZPLUG_HOME=~/.zplug
       source $ZPLUG_HOME/init.zsh
+
+      {% if zplug_theme %}
       # Load theme file
       zplug '{{ zplug_theme }}', as:theme
-      
+
+      {% endif %}
       # Install plugins if there are plugins that have not been installed
       if ! zplug check --verbose; then
           printf "Install? [y/N]: "
@@ -66,8 +69,11 @@
       # add ~.local/bin to PATH
       export PATH=~/.local/bin:$PATH
 
-      # additional user settings
+      {% if ohmy_user_settings %}
+      # begin additional user settings
       {{ ohmy_user_settings }}
+      # end additional user settings
+      {% endif %}
 
 - name: Check for Oh My ZSH Installation
   stat:
